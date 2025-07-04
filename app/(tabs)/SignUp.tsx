@@ -1,4 +1,13 @@
-import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Alert,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import usersData from '../../data/users.json';
@@ -55,7 +64,7 @@ export default function SignUp() {
 
     const existing = users.find((u) => u.email === email);
     if (existing) {
-      Alert.alert('Erreur', 'Cet email est déjà utilisé');
+      Alert.alert('Erreur', 'This Mail is already taken');
       return;
     }
 
@@ -69,11 +78,15 @@ export default function SignUp() {
     const updatedUsers = [...users, newUser];
     setUsers(updatedUsers);
 
-    Alert.alert('Succès', 'Compte créé avec succès');
+    Alert.alert('Succès', 'account create one successfully');
     router.push('/Home/welcomePage');
   };
 
   return (
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
     <View style={styles.container}>
       <Text style={styles.title}>Creating account</Text>
 
@@ -115,7 +128,8 @@ export default function SignUp() {
         <Text style={styles.link}>Login</Text>
       </TouchableOpacity>
     </View>
-  );
+    </KeyboardAvoidingView>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -137,7 +151,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   button: {
-    backgroundColor: '#00f',
+    backgroundColor: '#000',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,

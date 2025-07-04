@@ -9,12 +9,13 @@ export default function LoginScreen() {
   
   const handleLogin = () => {
     if (!email || !password) {
-      Alert.alert('Erreur', 'Veuillez remplir tous les champs');
+      Alert.alert('Error', 'Please fill in all the fields');
     } else {
-      Alert.alert('Bienvenue !', `Connecté avec ${email}`);
+      Alert.alert('Welcome!', `Logged in as ${email}`);
       router.push('/Home/welcomePage');
     }
   };
+  
   
   return (
     <View style={styles.container}>
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   button: {
-    backgroundColor: '#00f',
+    backgroundColor: '#000',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,

@@ -1,1 +1,35 @@
-[]
+[
+    {
+        "id": "1",
+        "name": "Maillot real madrid",
+        "description": "Maillot manches longues Real Madrid domicile 2025/26",
+        "price": 100.99,
+        "stock": 25,
+        "category": "football",
+        "vendeurs": "SportStore",
+        "image": "https://www.foot.fr/142496-large_default/maillot-manches-longues-real-madrid-domicile-2025-26.jpg",
+        "isActive": true
+    },
+    {
+        "id": "2",
+        "name": "Air Jordan 3 Retro Pure Money Blanc",
+        "description": "DÉCOLLAGE RÉTRO.La chaussure légendaire affiche un nouveau look d'inspiration rétro. Revisitant le coloris « Black Cement » d'origine, la Air Jordan 3 Retro arbore l'une des couleurs les plus emblématiques de la marque.Cuirs véritable et synthétique pour plus de résistance et de maintien.Semelle intermédiaire en mousse avec unité Air-Sole au talon et à l'avant-pied pour un amorti performant au quotidien.Semelle extérieure en caoutchouc offrant une meilleure adhérence et une plus grande durabilité.",
+        "price": 221.99,
+        "stock": 25,
+        "category": "basketball",
+        "vendeurs": "SportStore",
+        "image": "https://cdn2.basket4ballers.com/285109-large_default/air-jordan-3-retro-pure-money-ct8532-111.jpg",
+        "isActive": true
+    },
+    {
+        "id": "3",
+        "name": "ball volleyball",
+        "description": "/home/diary/Downloads/v333.jpg",
+        "price": 43.95,
+        "stock": 25,
+        "category": "football",
+        "vendeurs": "SportStore",
+        "image": "https://mikasasports.eu/wp-content/smush-webp/2025/01/v333w_png_updatedprofilepicture-300x300-1.png.webp",
+        "isActive": true
+    }
+]
