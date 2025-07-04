@@ -1,15 +1,50 @@
-import { StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
+import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+import { useRouter } from 'expo-router';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { View } from '@/components/Themed';
-
-export default function TabOneScreen() {
+export default function LoginScreen() {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const handleLogin = () => {
+    if (!email || !password) {
+      Alert.alert('Erreur', 'Veuillez remplir tous les champs');
+    } else {
+      Alert.alert('Bienvenue !', `Connecté avec ${email}`);
+      router.push('/Home/welcomePage');
+    }
+  };
+  
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <Text style={styles.title}>Connexion</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Username or Email"
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.signUpContainer}  onPress={() => router.push('/SignUp')}>
+        <Text style={styles.textSignUp}>Don't have account ?</Text>
+        <Text style={styles.link}>sign up</Text>
+      </TouchableOpacity>
+
     </View>
   );
 }
@@ -17,16 +52,51 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    padding: 20,
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 6,
+    margin: 10,
+  },
+  button: {
+    backgroundColor: '#00f',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    marginHorizontal: 20,
+    marginTop: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 15,
+    textAlign: 'center',
     fontWeight: 'bold',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  signUpContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 16,
+    gap: 20,
+  },  
+  link: {
+    marginTop: 16,
+    textAlign: 'center',
+    textDecorationLine: 'underline',
+    fontSize: 14,
+  },
+  textSignUp:{
+    marginTop: 16,
+    textAlign: 'center',
+    fontSize: 14,
   },
 });
