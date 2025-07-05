@@ -1,6 +1,7 @@
 # 📱 Sport Store – React Native Mobile App
 
-A mobile application built with React Native + Expo, featuring:
+A mobile application built with React Native + Expo
+featuring:
 - Product display
 - Product addition
 - User profile management
@@ -17,7 +18,6 @@ A mobile application built with React Native + Expo, featuring:
 - ➕ Add new products via a form (name, price, stock, category, description)
 - 👤 User profile management with editing and saving via `AsyncStorage`
 - 📱 Custom navigation between Home, Add Product, and Profile screens
-- 🎹 Smart keyboard handling (hides `Navbar` automatically)
 - 📸 Default image fallback for invalid URLs
 - 🧠 `ProductContext` for global product data management
 
@@ -52,10 +52,14 @@ npm install -g expo
 
 ```bash
 npx expo start
+# or
+npm start
 ```
 
-Scan the QR code with Expo Go on your Android/iOS device.
+**NB**: An internet connection is required when launching the application to display product images. Without an internet connection, no images will be shown.
 
+
+Scan the QR code with Expo Go on your Android/iOS device.
 
 
 ## 🧪 Testing the App
