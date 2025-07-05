@@ -2,6 +2,7 @@ import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity, KeyboardAvo
 import { useState, useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import usersData from '../../data/users.json';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type User = {
   id: string;
@@ -25,23 +26,28 @@ export default function LoginScreen() {
   const handleLogin = () => {
     if (!email || !password) {
       Alert.alert('Error', 'Please fill in all the fields');
-    } else {
+    } 
+    else {
       const existing = users.find((u) => u.email.trim() === email.trim() || u.username.trim() === email.trim());
       if (existing === undefined || existing?.password.trim() !== password.trim()) {
         Alert.alert('Error', 'Please verify your username or mail\nPlease Verify your password');
         return;
-      }  else {
-        Alert.alert('Welcome!', `Logged in as ${email}`);
+      }
+      else {
+        try {
+          AsyncStorage.setItem('user', JSON.stringify(existing));
+        } catch (error) {
+          console.error('Error saving user data:', error);
+        }
         router.push('/Home/welcomePage');
       }
-
     }
-  };
+  }
   
   
   return (
 
-      <KeyboardAvoidingView
+    <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import userData from '../../data/users.json';
 
 type User = {
   id: string;
@@ -9,11 +10,11 @@ type User = {
 
 type AuthContextType = {
   user: User | null;
-  setUser: (user: User | null) => void;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
 };
 
 // Crée le contexte
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType>({user:userData[0], setUser:()=>{}});
 
 // Fournisseur du contexte
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -28,9 +29,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 // Hook personnalisé pour utiliser le contexte
 export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
+  const {user, setUser} = useContext(AuthContext);
+
+  return { user, setUser};
 };

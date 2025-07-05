@@ -1,48 +1,64 @@
-// components/CustomNavbar.tsx
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 import { useRouter } from 'expo-router';
-import { SafeAreaProvider } from 'react-native-safe-area-context'
-// import HomePng from '../assets/images/home.png'
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import HomeIcon from '../assets/images/home.png';
+import AddIcon from '../assets/images/plus.png';
+import ProfileIcon from '../assets/images/user.png';
 
 export default function Navbar() {
   const router = useRouter();
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaView edges={['bottom']} style={styles.safeArea}>
       <View style={styles.navbar}>
-        <TouchableOpacity onPress={() => router.replace('/Home/welcomePage')}>
+        {/* Home Button */}
+        <TouchableOpacity style={styles.navItem} onPress={() => router.replace('/Home/welcomePage')}>
+          <Image source={HomeIcon} style={styles.icon} />
           <Text style={styles.link}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.replace('/addProduct/addProducts')}>
+
+        {/* Add Button */}
+        <TouchableOpacity style={styles.navItem} onPress={() => router.replace('/addProduct/addProducts')}>
+          <Image source={AddIcon} style={styles.icon} />
           <Text style={styles.link}>Add</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.replace('/Profile/profil')}>
-          <Text style={styles.link}>Profil</Text>
+
+        {/* Profile Button */}
+        <TouchableOpacity style={styles.navItem} onPress={() => router.replace('/Profile/profil')}>
+          <Image source={ProfileIcon} style={styles.icon} />
+          <Text style={styles.link}>Profile</Text>
         </TouchableOpacity>
-    </View>
-    </SafeAreaProvider>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    backgroundColor: '#f5f5f5',
+  },
   navbar: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    backgroundColor: '#f5f5f5',
     paddingVertical: 10,
     borderTopWidth: 1,
     borderColor: '#ccc',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right:0 ,
-    width: '100%',
+    backgroundColor: '#f5f5f5',
+  },
+  navItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    marginBottom: 4,
   },
   link: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'black',
-    padding: 16,
     textAlign: 'center',
   },
 });

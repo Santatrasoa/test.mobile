@@ -63,10 +63,6 @@ export default function SignUp() {
 
 
     const existing = users.find((u) => u.email.toLowerCase() === email.toLowerCase());
-    console.log('--- Emails dans users ---');
-    users.forEach(u => console.log(`[${u.email}]`));
-    console.log('--- Email saisi ---');
-    console.log(`[${email}]`);
 
     console.log(existing)
     if (existing) {

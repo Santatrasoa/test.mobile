@@ -7,8 +7,10 @@ import { useEffect } from 'react';
 import { Slot } from 'expo-router';
 import 'react-native-reanimated';
 
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useColorScheme } from '@/components/useColorScheme';
 import { AuthProvider } from '../context/AuthContext';
+import { ProductProvider } from '../context/ProductContext';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -52,10 +54,14 @@ function RootLayoutNav() {
 
   return (
       // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <SafeAreaProvider>
+      <ProductProvider>
         <Stack screenOptions={{headerShown:false}}>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           {/* <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
         </Stack>
-      // </ThemeProvider>
+      </ProductProvider>
+      </SafeAreaProvider>
+          // </ThemeProvider>
     );
 }
