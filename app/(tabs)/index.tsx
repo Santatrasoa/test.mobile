@@ -1,52 +1,80 @@
-import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity } from 'react-native';
-import { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'expo-router';
+import usersData from '../../data/users.json';
+
+type User = {
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+};
 
 export default function LoginScreen() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [users, setUsers] = useState<User[]>([]);
+  
+
+  useEffect(() => {
+    setUsers(usersData);
+  }, []);
+
   
   const handleLogin = () => {
     if (!email || !password) {
       Alert.alert('Error', 'Please fill in all the fields');
     } else {
-      Alert.alert('Welcome!', `Logged in as ${email}`);
-      router.push('/Home/welcomePage');
+      const existing = users.find((u) => u.email.trim() === email.trim() || u.username.trim() === email.trim());
+      if (existing === undefined || existing?.password.trim() !== password.trim()) {
+        Alert.alert('Error', 'Please verify your username or mail\nPlease Verify your password');
+        return;
+      }  else {
+        Alert.alert('Welcome!', `Logged in as ${email}`);
+        router.push('/Home/welcomePage');
+      }
+
     }
   };
   
   
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Connexion</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Username or Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-      />
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+      <View style={styles.container}>
+        <View style={styles.containerLogin}>
+        <Text style={styles.title}>Connexion</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Username or Email"
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.signUpContainer}  onPress={() => router.push('/SignUp')}>
-        <Text style={styles.textSignUp}>Don't have account ?</Text>
-        <Text style={styles.link}>sign up</Text>
-      </TouchableOpacity>
-
-    </View>
+        <TouchableOpacity style={styles.signUpContainer}  onPress={() => router.push('/SignUp')}>
+          <Text style={styles.textSignUp}>Don't have account ?</Text>
+          <Text style={styles.link}>sign up</Text>
+        </TouchableOpacity>
+        </View>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -94,10 +122,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textDecorationLine: 'underline',
     fontSize: 14,
+    color: '#007bff',
   },
   textSignUp:{
     marginTop: 16,
     textAlign: 'center',
     fontSize: 14,
+  },
+  containerLogin : {
+    borderWidth: 1,
+    borderColor: '#000',
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    borderRadius: 8,
   },
 });

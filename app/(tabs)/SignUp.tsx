@@ -62,7 +62,13 @@ export default function SignUp() {
 
 
 
-    const existing = users.find((u) => u.email === email);
+    const existing = users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+    console.log('--- Emails dans users ---');
+    users.forEach(u => console.log(`[${u.email}]`));
+    console.log('--- Email saisi ---');
+    console.log(`[${email}]`);
+
+    console.log(existing)
     if (existing) {
       Alert.alert('Erreur', 'This Mail is already taken');
       return;
@@ -88,45 +94,47 @@ export default function SignUp() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
     <View style={styles.container}>
-      <Text style={styles.title}>Creating account</Text>
+      <View style={styles.containerLogin}>
+        <Text style={styles.title}>Creating account</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Re-enter password"
-        value={confirmPassword}
-        onChangeText={setConfirmPassword}
-        secureTextEntry
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          value={username}
+          onChangeText={setUsername}
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Re-enter password"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          secureTextEntry
+        />
 
-      <TouchableOpacity style={styles.button} onPress={handleSignup}>
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleSignup}>
+          <Text style={styles.buttonText}>Sign Up</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.signUpContainer} onPress={() => router.push('/')}>
-        <Text style={styles.textSignUp}>Already have an account ?</Text>
-        <Text style={styles.link}>Login</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.signUpContainer} onPress={() => router.push('/')}>
+          <Text style={styles.textSignUp}>Already have an account ?</Text>
+          <Text style={styles.link}>Login</Text>
+        </TouchableOpacity>
+      </View>
     </View>
     </KeyboardAvoidingView>
     );
@@ -184,5 +192,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     color: '#333',
+  },
+  containerLogin : {
+    borderWidth: 1,
+    borderColor: '#000',
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    borderRadius: 8,
   },
 });

@@ -24,12 +24,34 @@
     {
         "id": "3",
         "name": "ball volleyball",
-        "description": "/home/diary/Downloads/v333.jpg",
+        "description": "A top-quality ball, the School Pro is perfect for players of all ages and levels",
         "price": 43.95,
-        "stock": 25,
-        "category": "football",
+        "stock": 16,
+        "category": "volleyball",
         "vendeurs": "SportStore",
         "image": "https://mikasasports.eu/wp-content/smush-webp/2025/01/v333w_png_updatedprofilepicture-300x300-1.png.webp",
+        "isActive": true
+    },
+    {
+        "id": "4",
+        "name": "TECNIFIBRE RACKET TF40 16x19 (305 GR)",
+        "description": "Tecnifibre is back with its range for competitors seeking maximum control over the ball: the TF40 rackets. Offering as much precision, touch and stability as ever, discover this new version featuring a 16x19 headsize for improved spin.Learn More",
+        "price": 259.99,
+        "stock": 10,
+        "category": "tennis",
+        "vendeurs": "SportStore",
+        "image": "https://www.tennispro.eu/media/catalog/product/cache/5/thumbnail/1200x/9df78eab33525d08d6e5fb8d27136e95/1/4/14tf43056_1.jpg",
+        "isActive": true
+    },
+    {
+        "id": "5",
+        "name": "Titleist Vokey SM8 Golf Wedge",
+        "description": "designed with a reimagined progressive center of gravity (CG) for improved feel, consistency, and distance control. They feature patented Spin Milled grooves for maximum spin and a variety of loft, bounce, and grind options to suit different playing styles and course conditions.",
+        "price": 10.50,
+        "stock": 10,
+        "category": "golf",
+        "vendeurs": "SportStore",
+        "image": "https://scottsdalegolf.b-cdn.net/storage/189726/conversions/vokey-sm8-48-(1)-compressed.jpg",
         "isActive": true
     }
 ]

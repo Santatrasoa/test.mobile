@@ -14,10 +14,10 @@ export default function Navbar() {
         <TouchableOpacity onPress={() => router.replace('/Home/welcomePage')}>
           <Text style={styles.link}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.replace('/Home/Product/addProducts')}>
+        <TouchableOpacity onPress={() => router.replace('/addProduct/addProducts')}>
           <Text style={styles.link}>Add</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.replace('/Home/profil')}>
+        <TouchableOpacity onPress={() => router.replace('/Profile/profil')}>
           <Text style={styles.link}>Profil</Text>
         </TouchableOpacity>
     </View>

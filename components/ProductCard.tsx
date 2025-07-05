@@ -16,7 +16,7 @@ export default function ProductCard({ id, name, price, image }: Props) {
   return (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => router.push(`/Home/Product/${id}`)} // navigue avec l'id
+      onPress={() => router.push(`/Product/${id}`)} // navigue avec l'id
     >
       <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.cardContent}>

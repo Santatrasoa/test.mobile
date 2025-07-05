@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Picker } from '@react-native-picker/picker'; // Installe ceci avec npm/yarn
 import productsData from '../../../data/products.json';
 import CustomNavbar from '@/components/Navbar';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 type Product = {
   id: string;
@@ -21,7 +21,16 @@ export default function HomeScreen() {
   const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState('');
-  const [selectedValue, setSelectedValue] = useState('')
+  const [selectedValue, setSelectedValue] = useState('All');
+  const [open, setOpen] = useState(false);
+  const [items, setItems] = useState([
+    { label: 'All', value: 'All' },
+    { label: 'football', value: 'football' },
+    { label: 'basketball', value: 'basketball' },
+    { label: 'volleyball', value: 'volleyball' },
+    { label: 'tenis', value: 'volleyball' },
+    { label: 'golf', value: 'volleyball' },
+  ]);
 
   useEffect(() => {
     setProducts(productsData);
@@ -32,7 +41,7 @@ export default function HomeScreen() {
   );
 
   const renderItem = ({ item }: { item: Product }) => (
-    <TouchableOpacity style={styles.card} onPress={() => router.push(`/`)}>
+    <TouchableOpacity style={styles.card} onPress={() => router.push(`/Product/${item.id}`)}>
       <Image source={{ uri: item.image }} style={styles.image} />
       <View style={styles.cardContent}>
         <Text style={styles.name}>{item.name}</Text>
@@ -52,17 +61,16 @@ export default function HomeScreen() {
           onChangeText={setSearch}
         /> 
 
-        <Picker
-          selectedValue={selectedValue}
-          style={styles.select}
-          onValueChange={(itemValue) => setSelectedValue(itemValue)}
-        >
-          <Picker.Item label="All" value="All" />
-          <Picker.Item label="football" value="football" />
-          <Picker.Item label="basketball" value="basketball" />
-          <Picker.Item label="volleyball" value="volleyball" />
-        </Picker>
-
+      <DropDownPicker
+        open={open}
+        value={selectedValue}
+        items={items}
+        setOpen={setOpen}
+        setValue={setSelectedValue}
+        setItems={setItems}
+        style={styles.select}
+        placeholder='all categories'
+      />
       </View>
  
       <FlatList
@@ -70,6 +78,8 @@ export default function HomeScreen() {
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         contentContainerStyle={styles.list}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false} 
       />
       <CustomNavbar />
     </View>
@@ -85,8 +95,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 10,
     width:'50%',
-    height:40,
     paddingHorizontal: 16,
+    paddingVertical: 15,
   },
   list: { paddingBottom: 80 },
   card: {
@@ -114,19 +124,25 @@ const styles = StyleSheet.create({
   },
   select: {
     backgroundColor: '#fff',
-    padding: 12,
-    borderWidth: 3,
-    borderColor: '#000',
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
     outline: 'none',
-    width:'40%',
+    width:'50%',
     height: 50,
     color: '#000',
     borderRadius:8,
+    fontSize: 12,
+    marginBottom: 10,
   },
   searchContainer: {
-    flex: 1,
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     width:'100%',
-    gap: 30,
+    marginBottom: 30,
+    gap: 10,
+    marginLeft: 80,
+    paddingHorizontal: 10, 
   }
 });

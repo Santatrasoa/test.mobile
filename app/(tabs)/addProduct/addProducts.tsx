@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, TextInput, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
-import productsData from '../../../../data/products.json';
+import productsData from '../../../data/products.json';
 import CustomNavbar from '@/components/Navbar';
 import { Picker } from '@react-native-picker/picker';
 
@@ -47,7 +47,7 @@ export default function HomeScreen() {
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
     <View style={styles.container}>
 
         <View style={styles.containerAddProject}>
